@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour {
     private NavMeshAgent agentAI;
     public int tarPoint;
     public Transform[] points;
+
+    public GameObject sensor;
     // Use this for initialization
     void Start () {
         delay = enemyData.delay;
@@ -70,18 +72,17 @@ public class EnemyController : MonoBehaviour {
         }
             agentAI.destination = points[tarPoint].position;
             tarPoint = (tarPoint + 1) % points.Length;
-
+            return;
     }
 
-    /*void OnCollisionEnter(Collision col)
+
+
+    void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag.Equals("Point1"))
+        if (col.gameObject.tag.Equals("Player"))
         {
-            target = point2;
+            Debug.Log("Player detected");
+            eType = EnemyType.Attack;
         }
-        if(col.gameObject.tag.Equals("Point2"))
-        {
-            target = point1;
-        }
-    }*/
+    }
 }
